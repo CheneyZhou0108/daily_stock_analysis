@@ -1,10 +1,16 @@
 name: 每日股票分析
 
 on:
-  # 定时触发 - 每天北京时间 15:00 (UTC 7:00)
+  # 🌟 1. 飞书暗号触发：只要收到精装房踢过来的 secret_changed 暗号，就立刻运行！
+  repository_dispatch:
+    types: [secret_changed]
+
+  # 🌟 2. 定时触发：周一到周五，北京时间下午 15:00 准时自动运行
+  # (北京时间 15:00 换算成世界协调时 UTC 是 7:00，所以用 0 7)
   schedule:
-    - cron: '0 10 * * 1-5'     # 周一到周五，UTC 7:00 = 北京时间 15:00
-  
+    - cron: '0 7 * * 1-5'
+
+# 下面是你原本文件里剩下的 jobs 等后续代码，保持不变即可...
   # 手动触发
   workflow_dispatch:
     inputs:
